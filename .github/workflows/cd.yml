@@ -31,3 +31,6 @@ jobs:
 
       - name: Verify gcloud
         run: gcloud info
+
+      - name: Push to gcloud
+        run: gcloud builds submit --tag us-central1-docker.pkg.dev/notely-509619/notely-ar-repo/notely:latest .
