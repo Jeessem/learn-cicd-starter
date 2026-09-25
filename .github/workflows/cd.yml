@@ -12,9 +12,22 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v6
+
       - name: Set up Go
         uses: actions/setup-go@v6
         with:
           go-version: "1.27.1"
+
       - name: Build production app
         run: ./scripts/buildprod.sh
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v3
+
+      - name: Verify gcloud
+        run: gcloud info
